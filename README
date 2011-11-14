@@ -8,6 +8,8 @@ Simple script to wrap the Jazz SCM command line (assumed to be on the path) to a
 
 Using this script will involve the creation of an RTC repository workspace, since at the time of writing this can't be removed using the command line you may wish to tidy them up using the GUI.
 
+Comments here: http://mikemacd.wordpress.com/2011/11/14/scmload-script-for-ibm-jazz-scm/
+
 ==License==
 Copyright (C) 2011 by Mike MacDonagh
 
