@@ -1,0 +1,43 @@
+#!/bin/bash
+
+rtc_server="https://your_server:9443/ccm"
+
+echo ""
+echo "Loads the contents of a component from a Jazz SCM stream to the current directory"
+echo 'Usage: scmload "<stream_name>" "<component_name>"'
+echo ""
+
+stream=$1
+comp=$2
+error=0
+
+if [ -z "$1" ]
+then
+  echo "Error: Please specify a stream"
+  error=1
+fi
+
+if [ -z "$2" ]
+then
+  echo "Error: Please specify a component"
+  error=1
+fi
+
+#generate a hopefully unique workspace name
+workspace=my_cmdline_wks_$stream
+
+if [ $error -eq 0 ]
+then
+  echo "Loading stream \"$stream\" component \"$comp\" into local workspace"
+  scm login -c -r $rtc_server -n rtclive
+  wks_created_str='scm create workspace -s "$stream" "$workspace" -r rtclive'
+  echo $wks_created_str
+  wks_success='echo "$wks_created_str" | grep "successfully created"'
+  if [ -n "$wks_success" ]
+  then
+    wks_id='echo $wks_created_str | cut -d "(" -f2 | cut -d ")" -f1'
+    scm load $wks_id "$comp" -r rtclive
+  fi
+fi
+
+echo ""
