@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo ""
+echo "Checks in and delivers current workspace changes against a workitem"
+echo "Usage: scmdeliver <workitem_number>"
+echo ""
+
+workitem=$1
+error=0
+
+if [ -z "$1" ]
+then
+  echo "Error: Please specify a workitem id"
+  error=1
+fi
+
+if [ $error -eq 0 ]
+then
+  echo "Checking in..."
+  checkin_str=`scm checkin * | grep "<No comment>"`
+  change_id=`echo $checkin_str | cut -d "(" -f2 | cut -d ")" -f1`
+  echo "Checked local changes into changeset $change_id"
+  echo "Associating with work item $workitem"
+  scm changeset associate $change_id $workitem
+  echo "Delivering..."
+  scm deliver
+fi

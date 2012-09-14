@@ -10,6 +10,16 @@ Using this script will involve the creation of an RTC repository workspace, sinc
 
 Comments here: http://mikemacd.wordpress.com/2011/11/14/scmload-script-for-ibm-jazz-scm/
 
+====RTC SCM Command Line Scripts: scmdeliver===
+
+Checks in and delivers current workspace changes against a workitem
+Usage: scmdeliver <workitem_number>
+
+==Readme==
+Simple script to wrap the Jazz SCM command line (assumed to be on the path) to allow users to checkin and deliver local workspace changes against a workitem
+
+Comments here: http://mikemacd.wordpress.com/2012/09/14/scm-checkin-an…m-jazz-rtc-scm/ ‎
+
 ==License==
 Copyright (C) 2011 by Mike MacDonagh
 
